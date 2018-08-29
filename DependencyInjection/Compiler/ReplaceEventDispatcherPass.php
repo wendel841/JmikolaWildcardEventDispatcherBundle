@@ -10,7 +10,8 @@ class ReplaceEventDispatcherPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $container->setDefinition(EventDispatcherInterface::class, $container->getDefinition('jmikola_wildcard_event_dispatcher.event_dispatcher'));
+        $container->setDefinition('event_dispatcher', $container->getDefinition('jmikola_wildcard_event_dispatcher.event_dispatcher'));
+        $container->getDefinition('event_dispatcher')->setPublic(true);
         $container->removeDefinition('jmikola_wildcard_event_dispatcher.event_dispatcher');
     }
 }
